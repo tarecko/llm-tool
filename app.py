@@ -7,7 +7,7 @@ st.set_page_config(page_title="تحليل التقييمات", layout="centered"
 st.title("🤖 ناهد الصالح تحليل التقييمات ")
 
 # إعداد مفتاح OpenAI
-openai.api_key = "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"
+openai.api_key = "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"
 client = OpenAI(api_key=openai.api_key)
 
 # دالة تحليل التقييم
