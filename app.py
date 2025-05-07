@@ -7,7 +7,7 @@ st.set_page_config(page_title="تحليل التقييمات", layout="centered"
 st.title("🤖 تحليل التقييمات باستخدام GPT")
 
 # إعداد مفتاح OpenAI
-openai.api_key = "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"
+openai.api_key = "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"
 client = OpenAI(api_key=openai.api_key)
 
 # دالة تحليل التقييم
