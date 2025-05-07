@@ -2,44 +2,48 @@ import streamlit as st
 import openai
 from openai import OpenAI
 
-# إعداد واجهة Streamlit
+# واجهة Streamlit
 st.set_page_config(page_title="تحليل التقييمات", layout="centered")
-st.title("ناهد الصالح 🧠 نظام تحليل التقييمات بالذكاء الصناعي")
+st.title("🤖 تحليل التقييمات باستخدام GPT")
 
+# إعداد مفتاح OpenAI
+openai.api_key = "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"
+client = OpenAI(api_key=openai.api_key)
 
-# إعداد العميل الجديد
-client = OpenAI(api_key="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")
-
-# تعريف الدالة الرئيسية
-def analyze_review_with_gpt(text):
+# دالة تحليل التقييم
+def analyze_review_with_gpt(review_text):
     prompt = f"""
-أنت مساعد ذكي لتحليل التقييمات. بناءً على التقييم التالي، حدد أولاً هل هو إيجابي أم سلبي.
-إذا كان سلبيًا، فقم بتحليل أسباب السلبية في شكل نقاط ثم اقترح حلولًا عملية أيضًا في شكل نقاط.
+نص التقييم:
+{review_text}
 
-التقييم:
-{text}
+حدد هل التقييم سلبي أو إيجابي، وإذا كان سلبيًا، قدم تحليلًا للأسباب المحتملة على شكل نقاط، ثم قدم توصيات عملية أيضًا على شكل نقاط.
 
-النتيجة:
-1. التصنيف (إيجابي/سلبي): 
-2. الأسباب:
-- 
-3. التوصيات:
--
+صيغة النتيجة:
+- النوع: إيجابي / سلبي
+- الأسباب:
+1.
+2.
+- التوصيات:
+1.
+2.
 """
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-3.5-turbo",  # يمكن تغييره إلى gpt-4o لاحقًا
         messages=[{"role": "user", "content": prompt}],
         temperature=0.4
     )
     return response.choices[0].message.content.strip()
 
 # واجهة المستخدم
-user_input = st.text_area("✍️ أدخل التقييم هنا:", height=200)
+user_input = st.text_area("📝 أدخل التقييم هنا:", height=200)
 
-if st.button("🔍 تحليل التقييم"):
+if st.button("🔍 تحليل"):
     if not user_input.strip():
-        st.warning("يرجى إدخال التقييم أولاً.")
+        st.warning("يرجى إدخال نص التقييم.")
     else:
         with st.spinner("جاري التحليل باستخدام GPT..."):
-            result = analyze_review_with_gpt(user_input)
-            st.markdown(result)
+            try:
+                result = analyze_review_with_gpt(user_input)
+                st.markdown(result)
+            except Exception as e:
+                st.error(f"حدث خطأ أثناء الاتصال بـ OpenAI: {e}")
