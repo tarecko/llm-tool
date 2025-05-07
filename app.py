@@ -1,6 +1,7 @@
 import streamlit as st
 import openai
 from openai import OpenAI
+import os
 
 # واجهة Streamlit
 st.set_page_config(page_title="تحليل التقييمات", layout="centered")
