@@ -4,10 +4,10 @@ from openai import OpenAI
 
 # واجهة Streamlit
 st.set_page_config(page_title="تحليل التقييمات", layout="centered")
-st.title("🤖 تحليل التقييمات باستخدام GPT")
+st.title("🤖 ناهد الصالح تحليل التقييمات ")
 
 # إعداد مفتاح OpenAI
-openai.api_key = "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"
+openai.api_key = "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"
 client = OpenAI(api_key=openai.api_key)
 
 # دالة تحليل التقييم
