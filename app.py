@@ -94,4 +94,4 @@ if st.button("🔍 Analyze Review" if lang == "English" else "🔍 تحليل ا
                 st.info("No further analysis needed." if lang == "English" else "لا حاجة لمزيد من التحليل.")
 
 
-st.markdown("[Visit my blog](https://tarecko.blogspot.com)")
+#st.markdown("[Visit my blog](https://tarecko.blogspot.com)")
