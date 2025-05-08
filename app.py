@@ -10,9 +10,12 @@ st.set_page_config(page_title="Review Analyzer", layout="wide")
 # 2. اختيار اللغة
 lang = st.sidebar.selectbox("🌐 Language / اللغة", ["English", "العربية"])
 
-st.title("📝 Review Analyzer")
-st.markdown(" ناهد الصالح ")
-
+if lang == "العربية":
+    st.title("📝 محلل التقييم")
+    st.markdown(" ناهد الصالح ")
+else:
+    st.title("📝 Review Analyzer")
+    st.markdown(" Nahed Al-Saleh ")
 # 3. تحميل نموذج التصنيف (BERT)
 @st.cache_resource
 def load_model():
